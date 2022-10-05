@@ -13,7 +13,6 @@
     />
     <!--===============================================================================================-->
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'util.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}" />
     <!--===============================================================================================-->
   </head>
@@ -66,10 +65,12 @@
             <div class="container-login100-form-btn">
               <div class="wrap-login100-form-btn">
                 <div class="login100-form-bgbtn"></div>
-                <button class="login100-form-btn">Register Account</button>
+                <input class="login100-form-btn" type="submit" value="Register Account">
               </div>
             </div>
-
+            <br>
+            {{form.errors}}
+            <br>
             <div class="text-center p-t-115">
               <span class="txt1"> Already have an account? </span>
 
@@ -88,8 +89,8 @@
 
 		//Query All input fields
 		var form_fields = document.getElementsByTagName('input')
-		form_fields[1].placeholder='Username..';
-		form_fields[2].placeholder='Email..';
+		form_fields[1].placeholder='Username...';
+		form_fields[2].placeholder='Email...';
 		form_fields[3].placeholder='Enter password...';
 		form_fields[4].placeholder='Re-enter Password...';
 
