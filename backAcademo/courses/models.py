@@ -11,10 +11,6 @@ class Courses(models.Model):
     def __str__(self):
         return self.name
 
-    class Meta:
-        verbose_name = 'Course'
-
-
 class Classes(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
@@ -23,6 +19,3 @@ class Classes(models.Model):
 
     def __str__(self):
         return self.name
-
-    class Meta:
-        verbose_name = 'Classe'
