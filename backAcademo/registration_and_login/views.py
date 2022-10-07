@@ -36,7 +36,7 @@ def loginPage(request):
 
         if user is not None:
             login(request, user)
-            return redirect('home')
+            return redirect('courses')
         else:
             messages.info(request, 'Credenciales de acceso inválidas')
 
@@ -47,14 +47,9 @@ def logoutUser(request):
     logout(request)
     return redirect('login')
 
-
 @login_required(login_url='login')
 @admin_only
-# @allowed_users(allowed_roles=['admin'])
 def home(request):
-    context = {}
-    return render(request, 'registration_and_login/main.html', context)
+	context = { }
 
-def userPage(request):
-    context = {}
-    return render(request, 'registration_and_login/user.html', context)
+	return render(request, 'accounts/dashboard.html', context)
