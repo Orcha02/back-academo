@@ -21,12 +21,8 @@ class ChooseAnswer(models.Model):
     def __str__(self):
         return self.text
     
-class User(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    total_score = models.DecimalField(verbose_name='Total Score', default=0, decimal_places=2, max_digits=10)
-
 class AnsweredQuestions(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     answer = models.ForeignKey(ChooseAnswer, on_delete=models.CASCADE, related_name="attempts")
     correct = models.BooleanField(verbose_name="Is this the correct answer?", default=False, null=False)
