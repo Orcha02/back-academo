@@ -10,6 +10,14 @@ def quiz(request):
         question_pk = request.POST.get('question_pk')
         answered_question = User.attempts.select_related('question').get(question__pk=question_pk)
         answer_pk = request.POST.get('answer_pk')
+
+        try:
+            ChooseAnswer = AnsweredQuestions.question.questions.get(pk=answer_pk)
+        except ObjectDoesNotExist:
+            raise Http404
+
+        User.validate_answer(answered_question, ChooseAnswer)
+        return redirect('result', answuered_question.pk)
     else:
         answered = AnsweredQuestions.objects.values_list('question__pk', flat=True)
         question = Question.objects.exclude(pk__in=answered)

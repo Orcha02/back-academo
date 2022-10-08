@@ -20,13 +20,38 @@
   </head>
   <body>
     <h1>Congratulations {{request.user}}, now its time to certificate you!</h1>
-    {% for question in question %}
-      <p>{{question}}</p>
-      {% for answers in question.questions.all %}
-        <p>
-            <strong strong>{{answers}}</strong>
-        </p>  
-      {% endfor %}
-    {% endfor %}
+    {% if question is None %}
+    <div class="container">
+      <div class="jumbotron my-4">
+        <h1>You already answered all of our questions</h1>
+        <a href="">Take a look here!</a>
+      </div>
+    </div>
+    {% else %}
+    <div class="container">
+      <div class="jumbotron my-4">
+        {% for question in question %}
+          <h3>
+            {{question}}
+          </h3>
+        <form method="POST" class="form">
+          {% csrf_token %}
+          <input type="hidden" name="question_pk" value={{question.pk}}"">
+          {% for answers in question.questions.all %}
+            <input class"form-check-input" type="radio" name="answer_pk" value="questions.pk"
+            id="choice-{{forloop.counter}}">
+            <label class="form-check-label" for="choice-{{forloop.counter}}" >
+               {{answers}}
+            </label>
+            <br>
+          {% endfor %}
+          <button type="submit" class="btn btn-success">
+            Submit
+          </button>
+        </form>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
   </body>
 </html>
